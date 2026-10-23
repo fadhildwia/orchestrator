@@ -1,37 +1,16 @@
-# Contoh memulai workflow
+# Template prompt workflow
 
 Pakai skill `product-orchestrator` pada chat utama di proyek yang sedang dikerjakan. Profil custom `product_orchestrator` juga tersedia untuk penugasan koordinasi yang didelegasikan; membuat profil tidak otomatis mengganti peran chat utama.
 
-## Client memberi brief
+## Pilih titik masuk
 
-```text
-Gunakan $product-orchestrator sebagai Product Lead untuk proyek ini.
-Brief client: [tempelkan brief atau berikan lokasi sumber].
-Platform dan batas yang diketahui: [jelaskan bila tersedia].
-Gunakan researcher dan reviewer untuk mempertajam kebutuhan, kemudian
-susun/perbarui PRD pada sumber aktif proyek. Tampilkan keputusan yang
-perlu saya konfirmasi. Setelah scope cukup jelas, lanjutkan desain UX/UI
-dan review internal. Siapkan bahan review client sebelum development.
-```
+- [Brief baru](templates/brief-baru.md): untuk kebutuhan mentah yang perlu diriset dan disusun menjadi PRD, lalu desain siap review client.
+- [PRD dari client](templates/prd-client.md): untuk meninjau kebutuhan existing, meneliti gap yang relevan, dan melanjutkan desain dalam scope yang diotorisasi.
+- [Lanjut development](templates/lanjut-development.md): untuk implementasi setelah persetujuan PRD/desain tersedia, dilanjutkan functional QA dan persiapan UAT.
 
-## Client sudah memberi PRD
+Salin blok prompt ke chat proyek tujuan, lalu isi konteks dan lokasi sumbernya. Tandai informasi yang belum tersedia sebagai “belum ditentukan”. Dua template awal berhenti pada desain siap review client; lanjutkan dengan template development setelah persetujuan yang relevan tersedia. Pekerjaan berikutnya dapat diteruskan pada chat yang sama.
 
-```text
-Gunakan $product-orchestrator. PRD client ada di [lokasi].
-Status persetujuan dan scope tugas: [jelaskan yang sudah disepakati].
-Audit kesiapan PRD, riset gap yang berpengaruh, lalu kerjakan desain dan
-review sesuai scope yang sudah diotorisasi. Pertahankan baseline client
-dan ajukan perubahan material beserta dampaknya.
-```
-
-## Melanjutkan setelah persetujuan
-
-```text
-Gunakan $product-orchestrator. Client menyetujui PRD [versi/lokasi] dan
-desain [versi/lokasi] untuk scope [rincian]. Lanjutkan development dalam
-scope itu dan jalankan reviewer pada mode functional QA ketika hasil
-siap diuji. Laporkan bukti pengujian serta bagian yang belum terverifikasi.
-```
+Template disimpan bersama referensi skill agar ikut terbawa saat pemasangan atau update personal. PRD, desain, dan hasil kerja client tetap berada pada proyek masing-masing.
 
 ## Memanggil satu specialist
 

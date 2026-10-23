@@ -58,28 +58,17 @@ Pembaruan: perbarui checkout sumber, periksa perubahan, lalu jalankan dry-run da
 
 ## Mulai di chat proyek
 
-Di chat utama proyek tujuan, panggil skill orchestrator:
+Buka chat utama di folder/repo proyek client, lalu salin template sesuai tahap:
 
-```text
-Gunakan $product-orchestrator sebagai Product Lead untuk proyek ini.
-Brief client ada di [lokasi atau tempelkan brief].
-Platform: [web responsif / iOS / Android / cross-platform].
-Kerjakan riset, PRD, dan desain sesuai flow, gunakan reviewer independen,
-lalu siapkan bahan review client sebelum development.
-```
+1. [Brief baru dari client](skills/product-orchestrator/references/templates/brief-baru.md) — riset, PRD, desain, dan review internal hingga siap review client.
+2. [PRD dari client](skills/product-orchestrator/references/templates/prd-client.md) — audit gap dan desain dengan mempertahankan baseline serta persetujuan existing.
+3. [Lanjut development](skills/product-orchestrator/references/templates/lanjut-development.md) — implementasi, functional QA, dan persiapan UAT setelah scope/desain disetujui.
 
-Jika client sudah memberi PRD:
-
-```text
-Gunakan $product-orchestrator. PRD client ada di [lokasi].
-Status persetujuan dan scope tugas: [jelaskan].
-Audit gap yang relevan, pertahankan baseline, dan lanjutkan tahap yang
-sudah diotorisasi. Ajukan perubahan material beserta dampaknya.
-```
+Ganti bagian bertanda kurung siku dengan konteks proyek. Tulis “belum ditentukan” untuk informasi yang belum tersedia; isi status persetujuan berdasarkan keputusan yang benar-benar diberikan. Ketiga template memanggil `$product-orchestrator` dan ikut terpasang bersama referensi skill saat installer dijalankan.
 
 Profil `product_orchestrator` digunakan ketika koordinasi itu sendiri didelegasikan; membuat profil tidak otomatis mengubah chat utama menjadi orchestrator. Skill pada chat utama yang mengaktifkan workflow. Pemilihan profil custom bergantung pada client/tool; skill juga memberi fallback delegasi dengan mandat peran yang sama.
 
-Contoh lanjutan dan pemanggilan specialist ada di [referensi penggunaan](skills/product-orchestrator/references/start.md). Jika skill/profil belum muncul, mulai chat baru atau restart Codex lalu periksa kembali. Jangan menganggap file terpasang sebagai bukti bahwa setiap client telah memuatnya.
+Panduan memilih template dan pemanggilan specialist ada di [referensi penggunaan](skills/product-orchestrator/references/start.md). Jika skill/profil belum muncul, mulai chat baru atau restart Codex lalu periksa kembali. Jangan menganggap file terpasang sebagai bukti bahwa setiap client telah memuatnya.
 
 ## Cara menilai hasil
 
