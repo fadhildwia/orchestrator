@@ -3,6 +3,7 @@
 import importlib.util
 import contextlib
 import io
+import hashlib
 import json
 from pathlib import Path
 import tempfile
@@ -30,9 +31,13 @@ class InstallerTests(unittest.TestCase):
             (folder / "SKILL.md").write_text(f"---\nname: {skill}\n---\nOriginal\n", encoding="utf-8")
             (folder / "references" / "brief.md").write_text("Supporting reference\n", encoding="utf-8")
             (folder / "agents" / "openai.yaml").write_text('interface:\n  display_name: "Example"\n', encoding="utf-8")
+        templates = self.package / "skills" / "frontend-engineer" / "references" / "templates"
+        templates.mkdir()
+        (templates / "handoff.md").write_text("Frontend handoff template\n", encoding="utf-8")
         (self.package / "agents").mkdir()
         for name in installer.AGENTS:
             (self.package / "agents" / name).write_text(f'name = "{name[:-5]}"\n', encoding="utf-8")
+        self.expected_file_count = 3 * len(installer.SKILLS) + len(installer.AGENTS) + 1
 
     def run_install(self, **options):
         return installer.run_install(self.package, self.home, **options)
@@ -51,7 +56,7 @@ class InstallerTests(unittest.TestCase):
 
     def test_default_plan_creates_nothing(self):
         result = self.run_install()
-        self.assertEqual(result["changed"], 16)
+        self.assertEqual(result["changed"], self.expected_file_count)
         self.assertFalse(self.home.exists())
 
     def test_cli_explicit_dry_run_and_mutually_exclusive_modes(self):
@@ -86,7 +91,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(self.destination().read_bytes(), self.source().read_bytes())
         self.assertEqual((self.destination().parent / "references" / "brief.md").read_text(), "Supporting reference\n")
         manifest = json.loads((self.home / "product-workflow" / "manifest.json").read_text())
-        self.assertEqual(len(manifest["files"]), 16)
+        self.assertEqual(len(manifest["files"]), self.expected_file_count)
         self.assertNotIn("config.toml", manifest["files"])
         self.assertNotIn(f"skills/{installer.SKILLS[0]}/notes.txt", manifest["files"])
 
@@ -95,9 +100,61 @@ class InstallerTests(unittest.TestCase):
         before = self.snapshot()
         result = self.run_install(apply=True)
         self.assertEqual(result["changed"], 0)
-        self.assertEqual(result["unchanged"], 16)
+        self.assertEqual(result["unchanged"], self.expected_file_count)
         self.assertFalse(result["manifest_changed"])
         self.assertEqual(self.snapshot(), before)
+        self.assertFalse((self.home / "product-workflow" / "backups").exists())
+
+    def test_upgrade_four_skill_manifest_adds_frontend_and_preserves_personal_files(self):
+        legacy_skills = tuple(skill for skill in installer.SKILLS if skill != "frontend-engineer")
+        with patch.object(installer, "SKILLS", legacy_skills):
+            self.run_install(apply=True)
+        manifest_path = self.home / "product-workflow" / "manifest.json"
+        legacy_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(len(legacy_manifest["files"]), 16)
+        unrelated = {
+            "config.toml": b'model = "personal"\n',
+            "AGENTS.md": b"Personal rules\n",
+            "skills/personal/SKILL.md": b"Personal skill\n",
+            "agents/personal.toml": b"Personal agent\n",
+            "skills/frontend-engineer/references/templates/my-notes.md": b"Personal template notes\n",
+        }
+        for name, data in unrelated.items():
+            path = self.home / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(data)
+        before = self.snapshot()
+        plan = self.run_install()
+        self.assertEqual(plan["changed"], 4)
+        self.assertEqual(plan["unchanged"], 16)
+        self.assertTrue(plan["manifest_changed"])
+        self.assertEqual(self.snapshot(), before)
+
+        result = self.run_install(apply=True)
+        self.assertEqual(result["changed"], 4)
+        installed = self.snapshot()
+        for name in (*legacy_manifest["files"], *unrelated):
+            self.assertEqual(installed[name], before[name])
+        nested = "skills/frontend-engineer/references/templates/handoff.md"
+        self.assertEqual(installed[nested], (self.package / nested).read_bytes())
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(manifest["version"], 1)
+        self.assertEqual(manifest["skills_home"], str(self.home / "skills"))
+        self.assertEqual(len(manifest["files"]), self.expected_file_count)
+        self.assertEqual(
+            {name for name in manifest["files"] if name.startswith("agents/")},
+            {f"agents/{name}" for name in installer.AGENTS},
+        )
+        self.assertEqual(len(installer.AGENTS), 4)
+        for name, digest in manifest["files"].items():
+            self.assertEqual(digest, hashlib.sha256(installed[name]).hexdigest())
+        for name in unrelated:
+            self.assertNotIn(name, manifest["files"])
+        repeated = self.run_install(apply=True)
+        self.assertEqual(repeated["changed"], 0)
+        self.assertEqual(repeated["unchanged"], self.expected_file_count)
+        self.assertFalse(repeated["manifest_changed"])
+        self.assertEqual(self.snapshot(), installed)
         self.assertFalse((self.home / "product-workflow" / "backups").exists())
 
     def test_late_conflict_prevents_all_writes(self):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Plan or install the four product workflow skills and Codex agent files."""
+"""Plan or install the product workflow skills and four Codex agent files."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ SKILLS = (
     "critical-product-research",
     "product-ui-ux",
     "product-review-qa",
+    "frontend-engineer",
 )
 AGENTS = (
     "product_orchestrator.toml",

@@ -5,6 +5,7 @@ import re
 import sys
 import tomllib
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 import yaml
 
@@ -15,6 +16,7 @@ ROLES = {
     "product_designer": "product-ui-ux",
     "product_reviewer": "product-review-qa",
 }
+SKILLS = (*ROLES.values(), "frontend-engineer")
 
 
 def validate(root: Path = ROOT) -> list[str]:
@@ -35,6 +37,7 @@ def validate(root: Path = ROOT) -> list[str]:
         except (OSError, ValueError) as exc:
             errors.append(f"{profile}: {exc}")
 
+    for skill in SKILLS:
         folder = root / "skills" / skill
         entry = folder / "SKILL.md"
         try:
@@ -49,10 +52,14 @@ def validate(root: Path = ROOT) -> list[str]:
                 errors.append(f"{entry}: missing description")
             if "[TODO:" in content:
                 errors.append(f"{entry}: unfinished scaffold")
-            for link in re.findall(r"\]\((references/[^)#]+)(?:#[^)]+)?\)", content):
-                target = (folder / link).resolve()
-                if not target.is_relative_to(folder.resolve()) or not target.is_file():
-                    errors.append(f"{entry}: invalid reference {link}")
+            for document in (entry, *(folder / "references").rglob("*.md")):
+                for link in re.findall(r"\]\(([^)\s]+)\)", document.read_text(encoding="utf-8")):
+                    parsed = urlsplit(link)
+                    if parsed.scheme or parsed.netloc or not parsed.path:
+                        continue
+                    target = (document.parent / unquote(parsed.path)).resolve()
+                    if not target.is_relative_to(folder.resolve()) or not target.is_file():
+                        errors.append(f"{document}: invalid reference {link}")
             ui = yaml.safe_load((folder / "agents" / "openai.yaml").read_text(encoding="utf-8"))
             interface = ui.get("interface", {}) if isinstance(ui, dict) else {}
             if not isinstance(interface.get("display_name"), str):
@@ -71,4 +78,4 @@ if __name__ == "__main__":
         print(issue, file=sys.stderr)
     if issues:
         raise SystemExit(1)
-    print("Validated 4 agent profiles, 4 skills, UI metadata, and local references.")
+    print(f"Validated {len(ROLES)} agent profiles, {len(SKILLS)} skills, UI metadata, and local references.")
