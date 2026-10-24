@@ -14,7 +14,7 @@ Dikelola oleh [Fadhilah Dwi Ananda (@fadhildwia)](https://github.com/fadhildwia)
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/fadhildwia"><img src="https://avatars.githubusercontent.com/u/46224529?v=4?s=100" width="100px;" alt="Fadhilah Dwi Ananda"/><br /><sub><b>Fadhilah Dwi Ananda</b></sub></a><br /><a href="https://github.com/fadhildwia/orchestrator/commits?author=fadhildwia" title="Code">💻</a> <a href="https://github.com/fadhildwia/orchestrator/commits?author=fadhildwia" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/fadhildwia"><img src="https://avatars.githubusercontent.com/u/46224529?v=4?s=100" width="100px;" alt="Fadhilah Dwi Ananda"/><br /><sub><b>Fadhilah Dwi Ananda</b></sub></a><br /><a href="https://github.com/fadhildwia/orchestrator/commits?author=fadhildwia" title="Code">💻</a> <a href="https://github.com/fadhildwia/orchestrator/commits?author=fadhildwia" title="Documentation">📖</a> <a href="#maintenance-fadhildwia" title="Maintenance">🚧</a></td>
     </tr>
   </tbody>
   <tfoot>
