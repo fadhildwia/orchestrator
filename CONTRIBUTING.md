@@ -55,7 +55,17 @@ Perubahan workflow yang berarti memerlukan forward-test independen dengan brief 
 
 Jika pemeriksaan tidak dapat dijalankan, tulis perintah, kendala, dan cakupan yang belum diverifikasi. Bantuan AI diperbolehkan; periksa hasilnya, jelaskan pemakaian yang relevan bagi reviewer, dan pastikan klaim validasi sesuai bukti yang benar-benar tersedia.
 
-Nama atau username publik dapat ditambahkan secara opsional ke [CONTRIBUTORS.md](CONTRIBUTORS.md) bersama ringkasan kontribusi. Jangan memasukkan data kontak pribadi orang lain.
+## Atribusi dengan All Contributors
+
+Pencantuman dalam [CONTRIBUTORS.md](CONTRIBUTORS.md) bersifat opsional. Untuk meminta penambahan nama atau jenis kontribusi, tulis komentar pada issue atau pull request yang terkait:
+
+```text
+@allcontributors please add @USERNAME for code, doc
+```
+
+Ganti `USERNAME` dengan username GitHub publik dan pilih [jenis kontribusi](https://allcontributors.org/en/emoji-key/) yang sesuai, misalnya `code`, `doc`, `bug`, `review`, atau `maintenance`. Bot membuat pull request yang memperbarui `.all-contributorsrc` dan tabel di `CONTRIBUTORS.md`; maintainer meninjau lalu menggabungkannya. Ini berlaku juga untuk kontribusi di luar kode.
+
+Gunakan bot atau CLI All Contributors untuk memperbarui tabel yang berada di antara penanda `ALL-CONTRIBUTORS`, agar data dan tampilan tetap selaras. Atribusi bantuan AI tetap berada di bagian terpisah pada dokumen tersebut. Jangan memasukkan data kontak pribadi orang lain. Detail pemakaian tersedia pada [dokumentasi bot](https://allcontributors.org/en/bot/usage/).
 
 ## Lisensi dan perilaku komunitas
 

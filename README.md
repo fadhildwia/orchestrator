@@ -121,7 +121,7 @@ Perbaikan dokumentasi, laporan bug, contoh sintetis, peningkatan installer, dan 
 
 ## Kontributor
 
-Dikelola oleh [Fadhilah Dwi Ananda (@fadhildwia)](https://github.com/fadhildwia), dengan bantuan pengembangan dari **Codex (OpenAI)**. Lihat [daftar kontributor](CONTRIBUTORS.md); kontributor baru dipersilakan bergabung.
+Dikelola oleh [Fadhilah Dwi Ananda (@fadhildwia)](https://github.com/fadhildwia), dengan bantuan pengembangan dari **Codex (OpenAI)**. [Daftar kontributor](CONTRIBUTORS.md) menggunakan All Contributors; minta penambahan melalui komentar `@allcontributors please add @USERNAME for code, doc` pada issue atau pull request terkait. Bot mengajukan pembaruan lewat pull request untuk direview maintainer. Lihat [panduan kontribusi](CONTRIBUTING.md#atribusi-dengan-all-contributors); kontributor baru dipersilakan bergabung.
 
 ## Lisensi
 
