@@ -2,6 +2,8 @@
 
 Setup personal untuk website dan mobile apps: orchestrator sebagai Product Lead/pemilik PRD, researcher kritis, UI/UX designer, dan reviewer/QA independen. Skill mandiri `frontend-engineer` menangani ticket frontend harian. Sumber konfigurasi disimpan di repo ini; pemasangan personal membuatnya dapat digunakan dari proyek lain.
 
+Kontribusi komunitas terbuka melalui [issues](https://github.com/fadhildwia/orchestrator/issues) dan [pull requests](https://github.com/fadhildwia/orchestrator/pulls). Baca [panduan kontribusi](CONTRIBUTING.md) untuk mulai; proyek ini memakai [lisensi MIT](LICENSE).
+
 ## Peran dan skill
 
 | Profil agent | Skill | Tanggung jawab |
@@ -112,3 +114,15 @@ python3 -m unittest discover -s tests -v
 Validator memeriksa TOML, frontmatter/metadata YAML, pasangan empat profil-skill, skill mandiri, dan referensi lokal. Test installer berjalan dalam direktori sementara; tidak menulis konfigurasi personal. Pemeriksaan perilaku skill tetap memerlukan contoh tugas nyata dan review independen, termasuk mode frontend serta penanganan bukti QA yang belum tersedia.
 
 Format mengikuti dokumentasi resmi [Subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents) dan [Build skills](https://learn.chatgpt.com/docs/build-skills). Kapabilitas dapat berbeda antar client/versi Codex.
+
+## Berkontribusi
+
+Perbaikan dokumentasi, laporan bug, contoh sintetis, peningkatan installer, dan penyempurnaan workflow dipersilakan. Fork repo, buat branch perubahan, lalu ajukan pull request sesuai [CONTRIBUTING.md](CONTRIBUTING.md). Perubahan direview maintainer sebelum digabungkan. Ikuti [kode etik komunitas](CODE_OF_CONDUCT.md) dan simpan konteks proprietary client/perusahaan di proyek asalnya.
+
+## Kontributor
+
+Dikelola oleh [Fadhilah Dwi Ananda (@fadhildwia)](https://github.com/fadhildwia), dengan bantuan pengembangan dari **Codex (OpenAI)**. Lihat [daftar kontributor](CONTRIBUTORS.md); kontributor baru dipersilakan bergabung.
+
+## Lisensi
+
+[MIT](LICENSE) — Copyright (c) 2026 Fadhilah Dwi Ananda dan para kontributor.

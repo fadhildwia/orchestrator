@@ -1,0 +1,34 @@
+name: Usulan peningkatan
+description: Usulkan perbaikan dokumentasi, tooling, atau workflow.
+title: "[Usulan]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Jelaskan kebutuhan dengan contoh sintetis. Simpan konteks proprietary client/perusahaan di proyek asalnya.
+  - type: textarea
+    id: need
+    attributes:
+      label: Kebutuhan atau masalah
+      description: Siapa yang membutuhkan perubahan ini dan dalam situasi apa?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Usulan perubahan
+      description: Jelaskan hasil yang diinginkan dan bagian repo yang terdampak.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatif dan tradeoff
+      description: Sertakan cara yang sudah dicoba atau pilihan lain bila ada.
+  - type: textarea
+    id: validation
+    attributes:
+      label: Cara menilai keberhasilan
+      description: Contoh kasus, kriteria penerimaan, atau rencana verifikasi dan keterbatasannya.
+    validations:
+      required: true

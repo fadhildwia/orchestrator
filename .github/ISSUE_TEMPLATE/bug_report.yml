@@ -1,0 +1,42 @@
+name: Laporan bug
+description: Laporkan masalah pada installer, validasi, dokumentasi, atau workflow.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Terima kasih sudah membantu. Gunakan contoh sintetis dan hapus kredensial serta informasi proprietary client/perusahaan dari log atau screenshot.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah
+      description: Jelaskan masalah dan bagian repo yang terdampak.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Langkah reproduksi
+      description: Sertakan langkah atau prompt minimal yang aman dibagikan.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Hasil yang diharapkan
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Hasil aktual
+      description: Sertakan pesan error atau bukti yang relevan bila tersedia.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Lingkungan dan batas verifikasi
+      description: OS, versi Python, versi/client Codex bila relevan, commit repo, dan akses pengujian yang tersedia.
+    validations:
+      required: true
